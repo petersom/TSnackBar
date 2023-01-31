@@ -239,6 +239,30 @@ public final class TSnackbar {
         return this;
     }
 
+    public TSnackbar setIconLeft(Drawable drawable, float sizeDp) {
+        final TextView tv = mView.getMessageView();
+        if (drawable != null) {
+            drawable = fitDrawable(drawable, (int) convertDpToPixel(sizeDp, mContext));
+        } else {
+            throw new IllegalArgumentException("resource_id is not a valid drawable!");
+        }
+        final Drawable[] compoundDrawables = tv.getCompoundDrawables();
+        tv.setCompoundDrawables(drawable, compoundDrawables[1], compoundDrawables[2], compoundDrawables[3]);
+        return this;
+    }
+
+    public TSnackbar setIconRight(Drawable drawable, float sizeDp) {
+        final TextView tv = mView.getMessageView();
+        if (drawable != null) {
+            drawable = fitDrawable(drawable, (int) convertDpToPixel(sizeDp, mContext));
+        } else {
+            throw new IllegalArgumentException("resource_id is not a valid drawable!");
+        }
+        final Drawable[] compoundDrawables = tv.getCompoundDrawables();
+        tv.setCompoundDrawables(compoundDrawables[0], compoundDrawables[1], drawable, compoundDrawables[3]);
+        return this;
+    }
+
     /**
      * Overrides the max width of this snackbar's layout. This is typically not necessary; the snackbar
      * width will be according to Google's Material guidelines. Specifically, the max width will be
